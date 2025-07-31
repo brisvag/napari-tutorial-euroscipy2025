@@ -35,7 +35,7 @@ def threshold(
         (blobs, {'name': 'blobs'}, 'image'),
         (filled, {'name': 'filled'}, 'image'),
         (cleaned, {'name': 'cleaned'}, 'image'),
-        (labels, {'name': 'result', 'features': props}, 'labels'),
+        (labels, {'name': 'result'}, 'labels'),
         (centroids, {'name': 'centroids', 'features': props}, 'points'),
     ]
 
@@ -58,6 +58,30 @@ def watershed(
     ]
 
 
+def print_props(viewer, event):
+    if event.type != 'mouse_press':
+        return
+
+    try:
+        labels = viewer.layers['result']
+        centroids = viewer.layers['centroids']
+    except KeyError:
+        return
+
+    label_id = labels.get_value(
+        viewer.cursor.position,
+        view_direction=viewer.cursor._view_direction,
+        dims_displayed=viewer.dims.displayed,
+        world=True
+    )
+
+    if label_id == 0:
+        print('Background!')
+    else:
+        area = centroids.features.loc[label_id - 1, 'area']
+        print(f'Area of label {label_id}: {area} px.')
+
+
 if __name__ == "__main__":
     v = napari.Viewer()
     v.add_image(data.cells3d()[30, 1])  # 2d
@@ -66,5 +90,6 @@ if __name__ == "__main__":
 
     v.window.add_dock_widget(threshold)
     v.window.add_dock_widget(watershed)
+    v.mouse_drag_callbacks.append(print_props)
     napari.run()
 
