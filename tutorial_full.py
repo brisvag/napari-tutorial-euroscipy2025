@@ -14,8 +14,8 @@ from scipy import ndimage as ndi
 )
 def threshold(
     layer: napari.layers.Image,
-    sigma: float = 0.5,
-    threshold: float = 0.4,
+    sigma: float = 0.0,
+    threshold: float = 0.5,
     min_hole_size: int = 0,
     min_obj_size: int = 0,
 ) -> list[napari.types.LayerDataTuple]:
@@ -32,6 +32,7 @@ def threshold(
     props = measure.regionprops_table(labels, properties=['label', 'area', 'centroid'])
     centroids = np.array([props[f'centroid-{i}'] for i in range(norm.ndim)]).T
     return [
+        (blur, {'name': 'blur'}, 'image'),
         (blobs, {'name': 'blobs'}, 'image'),
         (filled, {'name': 'filled'}, 'image'),
         (cleaned, {'name': 'cleaned'}, 'image'),
@@ -59,7 +60,7 @@ def watershed(
 
 
 def print_props(viewer, event):
-    if event.type != 'mouse_press':
+    if event.type != 'mouse_press' or 'Shift' not in event.modifiers:
         return
 
     try:
@@ -71,21 +72,21 @@ def print_props(viewer, event):
     label_id = labels.get_value(
         viewer.cursor.position,
         view_direction=viewer.cursor._view_direction,
-        dims_displayed=viewer.dims.displayed,
+        dims_displayed=list(viewer.dims.displayed),
         world=True
     )
 
     if label_id == 0:
-        print('Background!')
+        napari.utils.notifications.show_info('Background!')
     else:
         area = centroids.features.loc[label_id - 1, 'area']
-        print(f'Area of label {label_id}: {area} px.')
+        napari.utils.notifications.show_info(f'Area of label {label_id}: {area} px.')
 
 
 if __name__ == "__main__":
     v = napari.Viewer()
-    v.add_image(data.cells3d()[30, 1])  # 2d
-    # v.add_image(data.cells3d()[:, 1])  # 3d
+    # v.add_image(data.cells3d()[30, 1])  # 2d
+    v.add_image(data.cells3d()[:, 1])  # 3d
     v.grid.enabled = True
 
     v.window.add_dock_widget(threshold)
