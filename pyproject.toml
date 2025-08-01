@@ -1,0 +1,11 @@
+[project]
+name = "napari-tutorial-euroscipy2025"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "napari>=0.6.3",
+    "pyqt6>=6.9.1",
+    "scikit-image>=0.25.2",
+]
