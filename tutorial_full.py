@@ -29,14 +29,15 @@ def threshold(
     cleaned = morphology.remove_small_objects(filled, min_obj_size)
     labels = measure.label(cleaned)
 
-    props = measure.regionprops_table(labels, properties=['label', 'area', 'centroid'])
+    props = measure.regionprops_table(labels, properties=['area', 'centroid'])
+    props_labels = {k: np.concat([[0], v]) for k, v in props.items()}
     centroids = np.array([props[f'centroid-{i}'] for i in range(norm.ndim)]).T
     return [
         (blur, {'name': 'blur'}, 'image'),
         (blobs, {'name': 'blobs'}, 'image'),
         (filled, {'name': 'filled'}, 'image'),
         (cleaned, {'name': 'cleaned'}, 'image'),
-        (labels, {'name': 'result'}, 'labels'),
+        (labels, {'name': 'result', 'features': props_labels}, 'labels'),
         (centroids, {'name': 'centroids', 'features': props}, 'points'),
     ]
 
@@ -65,7 +66,6 @@ def print_props(viewer, event):
 
     try:
         labels = viewer.layers['result']
-        centroids = viewer.layers['centroids']
     except KeyError:
         return
 
@@ -79,18 +79,17 @@ def print_props(viewer, event):
     if label_id == 0:
         napari.utils.notifications.show_info('Background!')
     else:
-        area = centroids.features.loc[label_id - 1, 'area']
+        area = labels.features.loc[label_id, 'area']
         napari.utils.notifications.show_info(f'Area of label {label_id}: {area} px.')
 
 
 if __name__ == "__main__":
     v = napari.Viewer()
-    # v.add_image(data.cells3d()[30, 1])  # 2d
-    v.add_image(data.cells3d()[:, 1])  # 3d
+    v.add_image(data.cells3d()[30, 1])  # 2d
+    # v.add_image(data.cells3d()[:, 1])  # 3d
     v.grid.enabled = True
 
     v.window.add_dock_widget(threshold)
     v.window.add_dock_widget(watershed)
     v.mouse_drag_callbacks.append(print_props)
     napari.run()
-
