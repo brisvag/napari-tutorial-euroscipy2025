@@ -29,15 +29,15 @@ def threshold(
     cleaned = morphology.remove_small_objects(filled, min_obj_size)
     labels = measure.label(cleaned)
 
-    props = measure.regionprops_table(labels, properties=['area', 'centroid'])
-    props_labels = {k: np.concat([[0], v]) for k, v in props.items()}
-    centroids = np.array([props[f'centroid-{i}'] for i in range(norm.ndim)]).T
+    props = measure.regionprops_table(labels, properties=['label', 'area', 'centroid'])
+    props['index'] = props.pop('label')
+    centroids = np.array([props[f'centroid-{i}'] for i in range(layer.ndim)]).T
     return [
         (blur, {'name': 'blur'}, 'image'),
         (blobs, {'name': 'blobs'}, 'image'),
         (filled, {'name': 'filled'}, 'image'),
         (cleaned, {'name': 'cleaned'}, 'image'),
-        (labels, {'name': 'result', 'features': props_labels}, 'labels'),
+        (labels, {'name': 'result', 'features': props}, 'labels'),
         (centroids, {'name': 'centroids', 'features': props}, 'points'),
     ]
 
