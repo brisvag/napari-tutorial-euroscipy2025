@@ -5,6 +5,8 @@ It covers how to use layers, how to quickly generate interactive GUI elements fo
 
 By the end, we will package everything into a working plugin that can be easily shared on PyPI and the [napari-hub](https://napari-hub.org/).
 
+<img width="1275" height="808" alt="image" src="https://github.com/user-attachments/assets/c7d6f8ad-d79c-468c-960a-fb60efd17829" />
+
 
 ## Installation instruction
 
