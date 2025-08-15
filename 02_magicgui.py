@@ -28,6 +28,5 @@ if __name__ == "__main__":
     image_layer = viewer.add_image(image)
 
     viewer.window.add_function_widget(threshold)
-    threshold(image_layer)
 
     napari.run()

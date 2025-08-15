@@ -74,6 +74,4 @@ if __name__ == "__main__":
     viewer.window.add_function_widget(threshold_and_label, magic_kwargs={'auto_call': True})
     viewer.window.add_function_widget(watershed)
 
-    threshold_and_label(image_layer)
-
     napari.run()

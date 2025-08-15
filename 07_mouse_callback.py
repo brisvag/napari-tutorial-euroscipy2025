@@ -99,6 +99,4 @@ if __name__ == "__main__":
     viewer.window.add_function_widget(watershed)
     viewer.mouse_drag_callbacks.append(print_props)
 
-    threshold_and_label(image_layer)
-
     napari.run()
