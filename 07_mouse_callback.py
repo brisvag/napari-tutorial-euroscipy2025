@@ -61,7 +61,7 @@ def watershed(
     watershedded = segmentation.watershed(-distance_field, markers, mask=base_labels)
 
     return [
-        (distance_field, {'name': 'distance field'}, 'image')
+        (distance_field, {'name': 'distance field'}, 'image'),
         (watershedded, {'name': 'watershed'}, 'labels')
     ]
 
@@ -80,7 +80,7 @@ def print_props(viewer, event):
         viewer.cursor.position,
         view_direction=viewer.cursor._view_direction,
         dims_displayed=list(viewer.dims.displayed),
-        world=True
+        world=True,
     )
 
     if label_id == 0:

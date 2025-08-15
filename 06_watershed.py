@@ -61,7 +61,7 @@ def watershed(
     watershedded = segmentation.watershed(-distance_field, markers, mask=base_labels)
 
     return [
-        (distance_field, {'name': 'distance field'}, 'image')
+        (distance_field, {'name': 'distance field'}, 'image'),
         (watershedded, {'name': 'watershed'}, 'labels')
     ]
 
