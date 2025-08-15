@@ -1,5 +1,10 @@
 # napari fundamentals tutorial
 
+This tutorial goes over the fundamentals of using napari for the interactive analysis of imaging data.
+It covers how to use layers, how to quickly generate interactive GUI elements for your processing functions, and how to integrate more complex features such as mouse callbacks.
+
+By the end, we will package everything into a working plugin that can be easily shared on PyPI and the [napari-hub](https://napari-hub.org/).
+
 
 ## Installation instruction
 
@@ -16,4 +21,6 @@ To setup your workspace:
 
 You may activate the environment by typing 
 * [Linux/MacOs] `source .venv/bin/activate`
-* [Windows] TBA
+* [Windows] `venv\Scripts\activate.bat` (or `venv\Scripts\Activate.ps1` if using PowerShell)
+
+To deactivate, simply execute `deactivate`.
