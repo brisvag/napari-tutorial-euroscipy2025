@@ -45,5 +45,6 @@ if __name__ == "__main__":
     image_layer = viewer.add_image(image)
 
     viewer.window.add_function_widget(threshold_and_label, magic_kwargs={'auto_call': True})
+    threshold_and_label(image_layer)
 
     napari.run()
