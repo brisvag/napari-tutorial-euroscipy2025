@@ -27,7 +27,12 @@ You may activate the environment by typing
 
 To deactivate, simply execute `deactivate`.
 
-### Jupyter notebook
+## Fully working plugin
+
+Using the the [napari plugin template](https://github.com/napari/napari-plugin-template#napari-plugin-template)
+, we will generate a working plugin from the above code. For a fully working example, see [this repo](https://github.com/brisvag/napari-tutorial-euroscipy2025-plugin).
+
+## Jupyter notebook
 
 If you want to try out the jupyter notebook, you also need to install jupyterlab:
 
@@ -47,7 +52,6 @@ jupyter lab napari_from_notebook.ipynb
 - [Examples gallery](https://www.napari-hub.org/)
 - [Magicgui](https://pyapp-kit.github.io/magicgui/)
 - the [napari-animation](https://github.com/napari/napari-animation) plugin
-- the [napari plugin template](https://github.com/napari/napari-plugin-template#napari-plugin-template)
 - [Using and creating plugins](https://napari.org/stable/plugins/index.html) and the [napari hub](https://www.napari-hub.org/)
 - [Contributing to napari](https://napari.org/stable/developers/index.html)
 - We are always active on the [zulip chat](https://www.napari-hub.org/) for questions and advice!
