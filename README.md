@@ -40,3 +40,11 @@ and then run it with
 ```sh
 jupyter lab napari_from_notebook.ipynb
 ```
+
+# See also
+
+- [Getting started with napari](https://napari.org/stable/tutorials/start_index.html)
+- [The examples gallery](https://www.napari-hub.org/)
+- [Using and creating plugins](https://napari.org/stable/plugins/index.html) and the [napari hub](https://www.napari-hub.org/)
+- [Contributing to napari](https://napari.org/stable/developers/index.html)
+- We are always active on the [zulip chat](https://www.napari-hub.org/) for questions and advice!
