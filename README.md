@@ -26,3 +26,17 @@ You may activate the environment by typing
 * [Windows] `venv\Scripts\activate.bat` (or `venv\Scripts\Activate.ps1` if using PowerShell)
 
 To deactivate, simply execute `deactivate`.
+
+### jupyter notebook
+
+If you want to try out the jupyter notebook, you also need to install jupyterlab:
+
+```sh
+uv pip install jupyterlab
+```
+
+and then run it with
+
+```sh
+jupyter lab napari_from_notebook.ipynb
+```
