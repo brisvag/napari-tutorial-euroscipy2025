@@ -13,6 +13,9 @@ dependencies = [
 ]
 
 [dependency-groups]
+jupyterlab = [
+    "jupyterlab>=4.4.6",
+]
 plugin = [
     "napari-animation>=0.0.9",
 ]
